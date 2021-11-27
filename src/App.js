@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { csv, csvFormat } from 'd3';
-import logo from './logo.svg';
+import Chart from './components/Chart';
 import './App.css';
 
 
@@ -31,6 +31,7 @@ function App() {
   return (
     <div>
       {!isLoading ? <pre id='message-container'>{messageF}</pre> : <p>Unable to Load data</p>}
+      <Chart/>
     </div>
   );
 }
