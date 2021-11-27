@@ -23,7 +23,7 @@ const run = async () => {
     document.body.appendChild(await marks.render());
 };
 
-const Chart  = () => {
+const ScatterPlot  = () => {
     
     useEffect( ()=>{
         run()
@@ -34,4 +34,4 @@ const Chart  = () => {
     )
 }
 
-export default Chart;
+export default ScatterPlot;
