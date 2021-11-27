@@ -4,6 +4,7 @@ const csvUrl = 'https://gist.githubusercontent.com/curran/8c131a74b85d0bb0246233
 
 const getData = async() => {
     const data = await csv(csvUrl);
+    console.log(data[0])
     return data;
 }
 
