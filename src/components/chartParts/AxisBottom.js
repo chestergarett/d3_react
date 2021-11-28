@@ -1,6 +1,6 @@
 import classes from './Axis.module.css';
 
-const AxisBottom = ({xScale, innerHeight, tickFormat}) => {
+const AxisBottom = ({xScale, innerHeight, tickFormat, tickOffset = 3}) => {
     return(
         <>
         {xScale.ticks().map(tickValue => {
@@ -15,7 +15,7 @@ const AxisBottom = ({xScale, innerHeight, tickFormat}) => {
                     />
                     <text 
                         style={{ textAnchor: 'middle' }}
-                        y={innerHeight+3}
+                        y={innerHeight+tickOffset}
                         dy=".71em"
                     >
                             {tickFormat(tickValue)}

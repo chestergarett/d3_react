@@ -11,7 +11,7 @@ const margin = { top: 20, right: 20, bottom: 55, left: 250 }
 const xAxisLabelOffset = 35;
 
 const BarChart = () => {
-    const data = useData()
+    const data = useData('https://gist.githubusercontent.com/curran/0ac4077c7fc6390f5dd33bf5c06cb5ff/raw/605c54080c7a93a417a3cea93fd52e7550e76500/UN_Population_2019.csv', 'bar')
 
     if(!data){
         return <pre>Loading...</pre>;
@@ -42,7 +42,10 @@ const BarChart = () => {
                     innerHeight={innerHeight} 
                     tickFormat={xAxisTickFormat}
                 />
-                <AxisLeft yScale={yScale} />
+                <AxisLeft 
+                    yScale={yScale} 
+                    type='bar'
+                />
                 <text 
                     className={classes['axis-label']}
                     x={innerWidth/2} 
@@ -58,6 +61,7 @@ const BarChart = () => {
                     xValue={xValue} 
                     yValue={yValue}
                     tooltipFormat={xAxisTickFormat}
+                    type='bar'
                 />
             </g>
         </svg>

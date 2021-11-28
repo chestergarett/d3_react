@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import ColorPie from './components/ColorPie';
-import ScatterPlot from './components/ScatterPlot';
+import ScatterPlotVega from './components/ScatterPlotVega';
 import BarChart from './components/BarChart';
+import ScatterPlot from './components/ScatterPlot';
 import Divider from './components/extras/Divider';
 import './App.css';
 
@@ -13,7 +14,9 @@ function App() {
         <Divider />
       <ColorPie/>
         <Divider />
-      <ScatterPlot/>
+      <ScatterPlot />
+        <Divider />
+      <ScatterPlotVega/>
     </div>
   );
 }

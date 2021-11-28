@@ -1,22 +1,32 @@
 import { useState, useEffect } from 'react';
 import { csv } from 'd3';
 
-const csvUrl = 'https://gist.githubusercontent.com/curran/0ac4077c7fc6390f5dd33bf5c06cb5ff/raw/605c54080c7a93a417a3cea93fd52e7550e76500/UN_Population_2019.csv';
-
-const useData = () => {
+const useData = (csvUrl,chart) => {
     const [data, setData] = useState(null);
 
     useEffect( ()=> {
-        const row = (d) => {
-            d.Population = +d['2020'] * 1000;
-            return d;
-        };
-        
-        csv(csvUrl, row)
-            .then((data) => {
-                setData(data?.slice(0,10))
-            });
-        
+        switch(chart){
+            case 'bar':
+                const row = (d) => {
+                    d.Population = +d['2020'] * 1000;
+                    return d;
+                };
+
+                csv(csvUrl, row)
+                    .then((data) => {
+                    setData(data?.slice(0,10))
+                });
+                break;
+            case 'scatterplot':
+                const row2 = d => {
+                    d.sepal_length = +d.sepal_length;
+                    d.sepal_width = +d.sepal_width;
+                    d.petal_length = +d.petal_length;
+                    d.petal_width = +d.petal_width;
+                    return d;
+                }
+                csv(csvUrl, row2).then(setData);
+        }
     },[])
 
     return data;
