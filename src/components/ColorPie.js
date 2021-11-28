@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { csv, arc, pie } from 'd3';
+import { csv, arc, pie, } from 'd3';
 
 const width = 960;
 const height = 500;
