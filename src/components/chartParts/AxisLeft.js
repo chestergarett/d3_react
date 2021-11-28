@@ -1,9 +1,15 @@
+import classes from './Axis.module.css'
+
 const AxisLeft = ({yScale}) => {
     return(
         <>
         {yScale.domain().map(tickValue => {
             return (
-                <g key={tickValue} transform={`translate(0,${yScale(tickValue)+yScale.bandwidth() /2})`}>
+                <g 
+                    className={classes.tick} 
+                    key={tickValue} 
+                    transform={`translate(0,${yScale(tickValue)+yScale.bandwidth() /2})`}
+                >
                     <text 
                         style={{textAnchor: 'end'}}
                         x={-3}
