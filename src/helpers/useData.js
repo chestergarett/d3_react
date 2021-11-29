@@ -26,6 +26,15 @@ const useData = (csvUrl,chart) => {
                     return d;
                 }
                 csv(csvUrl, row2).then(setData);
+                break;
+            case 'line':
+                const row3 = d => {
+                    d.temperature = +d.temperature;
+                    d.timestamp = new Date(d.timestamp)
+                    return d;
+                }
+                csv(csvUrl, row3).then(setData)
+                break;
         }
     },[])
 
