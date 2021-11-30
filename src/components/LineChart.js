@@ -34,7 +34,8 @@ const LineChart = () => {
 
     const yScale = scaleLinear()
                 .domain(extent(data, yValue))
-                .range([innerHeight, 0]);
+                .range([innerHeight, 0])
+                .nice();
 
     const xAxisTickFormat  = timeFormat('%a')
 
@@ -45,7 +46,7 @@ const LineChart = () => {
                     xScale={xScale} 
                     innerHeight={innerHeight} 
                     tickFormat={xAxisTickFormat}
-                    tickOffset={5}
+                    tickOffset={7}
                 />
                 <text 
                     className={classes['axis-label']}
@@ -75,7 +76,7 @@ const LineChart = () => {
                     xValue={xValue} 
                     yValue={yValue}
                     tooltipFormat={xAxisTickFormat}
-                    type='scatterplot'
+                    type='line'
                 />
             </g>
         </svg>

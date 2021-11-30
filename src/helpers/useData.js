@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { csv } from 'd3';
+import { csv, json } from 'd3';
+import { feature, mesh } from 'topojson';
 
 const useData = (csvUrl,chart) => {
     const [data, setData] = useState(null);
@@ -34,6 +35,15 @@ const useData = (csvUrl,chart) => {
                     return d;
                 }
                 csv(csvUrl, row3).then(setData)
+                break;
+            case 'json':
+                json(csvUrl).then( topojsonData => {
+                    const { countries, land } = topojsonData.objects;
+                    setData({
+                        land: feature(topojsonData, land),
+                        interiors: mesh(topojsonData, countries, (a,b)=> a!==b)   
+                    });
+                })
                 break;
         }
     },[])

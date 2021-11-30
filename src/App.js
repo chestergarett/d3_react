@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import WorldMap from './components/WorldMap';
 import ColorPie from './components/ColorPie';
 import ScatterPlotVega from './components/ScatterPlotVega';
 import BarChart from './components/BarChart';
@@ -10,7 +11,9 @@ import './App.css';
 function App() {
   
   return (
-    <div>
+    <>
+      <WorldMap/>
+        <Divider/>
       <LineChart/>
         <Divider/>
       <BarChart />
@@ -20,7 +23,7 @@ function App() {
       <ScatterPlot />
         <Divider />
       <ScatterPlotVega/>
-    </div>
+    </>
   );
 }
 

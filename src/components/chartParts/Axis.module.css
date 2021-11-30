@@ -17,3 +17,32 @@
     font-size: 1em;
     color: #635F5D;
 }
+
+.marks circle{
+    fill: #137B80;
+}
+
+.marks path{
+    stroke: #137B80;
+    stroke-width: 3;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+}
+
+.marksMap .land{
+    fill: #137B80;
+}
+
+.marksMap .interiors{
+    fill: none;
+    stroke: #339498;
+}
+
+.marksMap .sphere {
+    fill: #C0C0BB;
+}
+
+.marksMap .graticules {
+    fill: none;
+    stroke: #dadada;
+}
