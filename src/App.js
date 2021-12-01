@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Menus from './components/Menus';
 import WorldMap from './components/WorldMap';
 import ColorPie from './components/ColorPie';
 import ScatterPlotVega from './components/ScatterPlotVega';
@@ -12,6 +13,8 @@ function App() {
   
   return (
     <>
+    <Menus/>
+      <Divider/>
       <WorldMap/>
         <Divider/>
       <LineChart/>
