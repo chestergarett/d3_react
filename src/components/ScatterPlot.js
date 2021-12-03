@@ -32,6 +32,7 @@ const getLabel = value => {
 
 const ScatterPlot = () => {
     const data = useData('https://gist.githubusercontent.com/curran/a08a1080b88344b0c8a7/raw/639388c2cbc2120a14dcf466e85730eb8be498bb/iris.csv', 'scatterplot')
+    const [hoveredValue, setHoveredValue] = useState(null);
 
     const initialXAttribute = 'petal_length';
     const [xAttribute, setXAttribute] = useState(initialXAttribute);
@@ -45,10 +46,13 @@ const ScatterPlot = () => {
     const xAxisLabel = getLabel(xAttribute);
     const yAxisLabel = getLabel(yAttribute);
     const circleRadius = 7
+    
     if (!data){
         return <div>Loading...</div>
     }
 
+    const filteredData = data.filter(d=> hoveredValue === colorValue(d))
+    
     const innerHeight = height - margin.top -margin.bottom;
     const innerWidth = width - margin.left -margin.right;
 
@@ -128,10 +132,25 @@ const ScatterPlot = () => {
                         tickSize={circleRadius}
                         tickTextOffset={12}
                         colorScale={colorScale}
+                        hoveredValue={hoveredValue}
+                        onHover={setHoveredValue}
+                    />
+                </g>
+                <g opacity={hoveredValue ? 0.2 : 1}>
+                    <Marks 
+                        data={data} 
+                        xScale={xScale} 
+                        yScale={yScale}
+                        colorScale={colorScale} 
+                        xValue={xValue} 
+                        yValue={yValue}
+                        colorValue={colorValue}
+                        tooltipFormat={xAxisTickFormat}
+                        type='scatterplot'
                     />
                 </g>
                 <Marks 
-                    data={data} 
+                    data={filteredData} 
                     xScale={xScale} 
                     yScale={yScale}
                     colorScale={colorScale} 

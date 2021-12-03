@@ -7,6 +7,7 @@
 .tick text {
     fill: #635F5D;
     font-family: 'Poppins', sans-serif;
+    cursor: default;
 }
 
 .mark{
