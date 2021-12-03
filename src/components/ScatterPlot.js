@@ -1,15 +1,16 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import useData from '../helpers/useData';
-import{ format, scaleLinear, extent} from 'd3';
-import Dropdown from './Dropdown';
+import{ format, scaleLinear, extent, scaleOrdinal } from 'd3';
+import ReactDropdown from 'react-dropdown';
 import AxisBottom from './chartParts/AxisBottom';
 import AxisLeft from './chartParts/AxisLeft';
 import Marks from './chartParts/Marks';
+import ColorLegend from './chartParts/ColorLegend';
 import classes from './chartParts/Axis.module.css';
 
 const width = 960;
 const height = 500;
-const margin = { top: 20, right: 20, bottom: 55, left: 250 }
+const margin = { top: 20, right: 200, bottom: 65, left: 90 }
 const xAxisLabelOffset = 35;
 const yAxisLabelOffset = 35;
 
@@ -39,9 +40,11 @@ const ScatterPlot = () => {
 
     const xValue = d => d[xAttribute];
     const yValue =  d => d[yAttribute];
+    const colorValue = d => d.species;
+    const colorLegendLabel = 'Species';
     const xAxisLabel = getLabel(xAttribute);
     const yAxisLabel = getLabel(yAttribute);
-
+    const circleRadius = 7
     if (!data){
         return <div>Loading...</div>
     }
@@ -58,27 +61,31 @@ const ScatterPlot = () => {
                 .domain(extent(data, yValue))
                 .range([0, innerHeight]);
 
+    const colorScale = scaleOrdinal()
+                    .domain(data.map(colorValue))
+                    .range(['#E6842A', '#137B80', '#8E6C8A']);
+
     const siFormat = format('.2s')
     const xAxisTickFormat  = tickValue => siFormat(tickValue).replace('G', 'B')
 
     return(
         <>
-        <label for="x-select">X</label>
-        <Dropdown 
-            options={attributes}
-            id='x-select'
-            selectedValue={xAttribute}
-            onSelectedValueChange={setXAttribute}
-        />
-        <label for="y-select">Y</label>
-        <Dropdown 
-            options={attributes}
-            id='y-select'
-            selectedValue={yAttribute}
-            onSelectedValueChange={setYAttribute}
-        />
+        <div className='menu-container'>
+            <span className='dropdown-label'>X</span>
+            <ReactDropdown 
+                options={attributes}
+                value={xAttribute}
+                onChange={({ value }) => setXAttribute(value)}
+            />
+            <span className='dropdown-label'>Y</span>
+            <ReactDropdown 
+                options={attributes}
+                value={yAttribute}
+                onChange={({ value }) => setYAttribute(value)}
+            />
+        </div>
         <svg width={width} height={height}>
-            <g transform={`translate(${margin.left},${margin.right})`}>
+            <g transform={`translate(${margin.left},${margin.top})`}>
                 <AxisBottom 
                     xScale={xScale} 
                     innerHeight={innerHeight} 
@@ -106,12 +113,31 @@ const ScatterPlot = () => {
                 >
                     {xAxisLabel}
                 </text>
+                <g transform={`translate(${innerWidth +60}, 60)`}>
+                    <text
+                        x={35}
+                        y={-25}
+                        className={classes['axis-label']}
+                        textAnchor="middle"
+                    >
+                        {colorLegendLabel}
+                    </text>
+                    <ColorLegend 
+                        colorScale={colorScale}
+                        tickSpacing={22}
+                        tickSize={circleRadius}
+                        tickTextOffset={12}
+                        colorScale={colorScale}
+                    />
+                </g>
                 <Marks 
                     data={data} 
                     xScale={xScale} 
-                    yScale={yScale} 
+                    yScale={yScale}
+                    colorScale={colorScale} 
                     xValue={xValue} 
                     yValue={yValue}
+                    colorValue={colorValue}
                     tooltipFormat={xAxisTickFormat}
                     type='scatterplot'
                 />

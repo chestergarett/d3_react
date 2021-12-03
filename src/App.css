@@ -36,3 +36,28 @@
     transform: rotate(360deg);
   }
 }
+
+/* for dropdown menus */
+.Dropdown-root{
+  display: inline-block;
+  width: 300px;
+}
+
+.Dropdown-control{
+  border: 1px solid #635F5D;
+  border-radius: 5px;
+  padding: .5rem;
+  margin-right: .5rem;
+}
+
+.dropdown-label{
+  font-size: 2.5em;
+  color: #635F5D;
+  margin-right: 1rem;
+}
+
+.menu-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

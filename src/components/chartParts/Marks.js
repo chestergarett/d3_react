@@ -1,7 +1,7 @@
 import classes from './Axis.module.css';
 import { line, curveNatural, geoNaturalEarth1, geoPath, geoGraticule } from 'd3';
 
-const Marks = ({data, xScale, yScale, xValue, yValue, tooltipFormat, type }) => {
+const Marks = ({data, xScale, yScale, xValue, yValue, tooltipFormat, colorScale, colorValue, type }) => {
     {
         switch(type){
             case 'bar':
@@ -30,11 +30,11 @@ const Marks = ({data, xScale, yScale, xValue, yValue, tooltipFormat, type }) => 
                     {data.map((d,i) => {
                                 return (
                                     <circle 
-                                        className={classes.mark}
                                         cx={xScale(xValue(d))} 
                                         cy={yScale(yValue(d))} 
                                         r={10}
                                         key={i}
+                                        fill={colorScale(colorValue(d))}
                                     >
                                         <title>{tooltipFormat(xValue(d))}</title>
                                     </circle>
