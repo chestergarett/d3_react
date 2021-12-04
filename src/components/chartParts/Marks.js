@@ -12,7 +12,9 @@ const Marks = ({
         colorValue, 
         type, 
         worldAtlas, 
-        cities }) => {
+        cities,
+        sizeScale,
+        sizeValue }) => {
     {
         switch(type){
             case 'bar':
@@ -107,7 +109,11 @@ const Marks = ({
                             cities.map(d=>{
                                 const [x,y] = projection([d.lng, d.lat]);
                                 return(
-                                    <circle cx={x} cy={y} r={2} className={classes.cities}/>
+                                    <circle 
+                                        cx={x} 
+                                        cy={y} 
+                                        r={sizeScale(sizeValue(d))} 
+                                        className={classes.cities}/>
                                 )
                             })
                         }
