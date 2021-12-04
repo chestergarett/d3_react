@@ -5,6 +5,7 @@ import ScatterPlotVega from './components/ScatterPlotVega';
 import BarChart from './components/BarChart';
 import ScatterPlot from './components/ScatterPlot';
 import LineChart from './components/LineChart';
+import Migrants from './components/Migrants';
 import Divider from './components/extras/Divider';
 import './App.css';
 
@@ -12,6 +13,8 @@ function App() {
   
   return (
     <>
+      <Migrants/>
+        <Divider/>
       <WorldMap/>
         <Divider/>
       <LineChart/>
