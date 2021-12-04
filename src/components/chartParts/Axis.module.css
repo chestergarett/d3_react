@@ -31,12 +31,12 @@
 }
 
 .marksMap .land{
-    fill: #137B80;
+    fill: #d8d8d8;
 }
 
 .marksMap .interiors{
     fill: none;
-    stroke: #339498;
+    stroke: #c3c3c3;
 }
 
 .marksMap .sphere {
@@ -46,4 +46,9 @@
 .marksMap .graticules {
     fill: none;
     stroke: #dadada;
+}
+
+.cities{
+    fill: #137B80;    
+    opacity: 0.3;
 }

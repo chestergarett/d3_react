@@ -1,7 +1,18 @@
 import classes from './Axis.module.css';
 import { line, curveNatural, geoNaturalEarth1, geoPath, geoGraticule } from 'd3';
 
-const Marks = ({data, xScale, yScale, xValue, yValue, tooltipFormat, colorScale, colorValue, type }) => {
+const Marks = ({
+        data, 
+        xScale, 
+        yScale, 
+        xValue, 
+        yValue, 
+        tooltipFormat, 
+        colorScale, 
+        colorValue, 
+        type, 
+        worldAtlas, 
+        cities }) => {
     {
         switch(type){
             case 'bar':
@@ -81,7 +92,7 @@ const Marks = ({data, xScale, yScale, xValue, yValue, tooltipFormat, colorScale,
                         <path className={classes.sphere} d={path({ type: 'Sphere' })} />
                         <path className={classes.graticules} d={path(graticule())} />
                         {
-                            data.land.features.map((feature,i)=>{
+                            worldAtlas.land.features.map((feature,i)=>{
                                 return(
                                     <path
                                         d={path(feature)}
@@ -91,7 +102,15 @@ const Marks = ({data, xScale, yScale, xValue, yValue, tooltipFormat, colorScale,
                                 )
                             })
                         }
-                        <path className={classes.interiors} d={path(data.interiors)} />
+                        <path className={classes.interiors} d={path(worldAtlas.interiors)} />
+                        {
+                            cities.map(d=>{
+                                const [x,y] = projection([d.lng, d.lat]);
+                                return(
+                                    <circle cx={x} cy={y} r={2} className={classes.cities}/>
+                                )
+                            })
+                        }
                     </g>
                 )
         }
