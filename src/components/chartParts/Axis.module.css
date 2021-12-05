@@ -1,13 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
-.tick line{
-    stroke: #C0C0BB;
-}
-
 .tick text {
     fill: #635F5D;
     font-family: 'Poppins', sans-serif;
     cursor: default;
+    font-size: 0.5em;
 }
 
 .mark{
@@ -15,7 +12,7 @@
 }
 
 .axis-label{
-    font-size: 1em;
+    font-size: 0.5em;
     color: #635F5D;
 }
 
@@ -43,7 +40,7 @@
     fill: #C0C0BB;
 }
 
-.marksMap .graticules {
+.marksMap .graticules, .tick line {
     fill: none;
     stroke: #dadada;
 }

@@ -120,25 +120,60 @@ const Marks = ({
                         }
                     </g>
                 )
-                case 'migrants':
-                    return (
-                        <>
-                        {data.map((d,i) => {
-                                    return (
-                                        <rect 
-                                            x={xScale(d.x0)} 
-                                            y={yScale(d.y)} 
-                                            width={xScale(d.x1) - xScale(d.x0)}
-                                            height={innerHeight - yScale(d.y)}
-                                            className={classes.mark}
-                                        >
-                                            <title>{tooltipFormat(d.y)}</title>
-                                        </rect>
-                                    )
-                                }
-                        )}
-                        </>
-                    )
+            case 'migrants':
+                return (
+                    <>
+                    {data.map((d,i) => {
+                                return (
+                                    <rect 
+                                        x={xScale(d.x0)} 
+                                        y={yScale(d.y)} 
+                                        width={xScale(d.x1) - xScale(d.x0)}
+                                        height={innerHeight - yScale(d.y)}
+                                        className={classes.mark}
+                                    >
+                                        <title>{tooltipFormat(d.y)}</title>
+                                    </rect>
+                                )
+                            }
+                    )}
+                    </>
+                )
+            case 'migrantsMap':
+                const projection1 = geoNaturalEarth1();
+                const path1 = geoPath(projection1);
+                const graticule1 = geoGraticule();
+
+                return(
+                    <g className={classes.marksMap}>
+                        <path className={classes.sphere} d={path1({ type: 'Sphere' })} />
+                        <path className={classes.graticules} d={path1(graticule1())} />
+                        {
+                            worldAtlas.land.features.map((feature,i)=>{
+                                return(
+                                    <path
+                                        d={path1(feature)}
+                                        key={i}
+                                        className={classes.land}
+                                    />
+                                )
+                            })
+                        }
+                        <path className={classes.interiors} d={path1(worldAtlas.interiors)} />
+                        {
+                            cities.map(d=>{
+                                const [x,y] = projection1(d.coords);
+                                return(
+                                    <circle 
+                                        cx={x} 
+                                        cy={y} 
+                                        r={sizeScale(sizeValue(d))} 
+                                        className={classes.cities}/>
+                                )
+                            })
+                        }
+                    </g>
+                )
         }
     }
 }

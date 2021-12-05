@@ -6,13 +6,11 @@ import AxisBottom from './chartParts/AxisBottom';
 import AxisLeft from './chartParts/AxisLeft';
 import Marks from './chartParts/Marks';
 
-const width = 960;
-const height = 500;
-const margin = { top: 20, right: 20, bottom: 55, left: 250 }
+const margin = { top: 0, right: 30, bottom: 20, left: 90 }
 const xAxisLabelOffset = 54;
-const yAxisLabelOffset = 50;
+const yAxisLabelOffset = 30;
 
-const Migrants = () => {
+const Migrants = ({height, width}) => {
     const data = useData('https://gist.githubusercontent.com/curran/a9656d711a8ad31d812b8f9963ac441c/raw/267eac8b97d161c479d950ffad3ddd5ce2d1f370/MissingMigrants-Global-2019-10-08T09-47-14-subset.csv', 'migrants')
     
     if(!data){
@@ -54,44 +52,45 @@ const Migrants = () => {
             .range([innerHeight, 0])
 
     return(
-        <svg width={width} height={height}>
-            <g transform={`translate(${margin.left}, ${margin.top})`}>
-                <AxisBottom
-                    xScale={xScale}
-                    innerHeight={innerHeight}
-                    tickFormat={xAxisTickFormat}
-                    tickOffset={5}
-                    type='scatterplot'
-                />
-                <text
-                    className={classes['axis-label']}
-                    textAnchor='middle'
-                    transform={`translate(${-yAxisLabelOffset},${innerHeight/2}) rotate(-90)`}
-                >{yAxisLabel}
-                </text>
-                <AxisLeft 
-                    yScale={yScale} 
-                    innerWidth={innerWidth} 
-                    tickOffset={5} 
-                    type='scatterplot'
-                />
-                <text
-                    className={classes['axis-label']}
-                    x={innerWidth /2 }
-                    y={innerHeight+xAxisLabelOffset}
-                    textAnchor='middle'
-                >{xAxisLabel}
-                </text>
-                <Marks
-                    data={binnedData}
-                    xScale={xScale}
-                    yScale={yScale}
-                    tooltipFormat={d=>d}
-                    innerHeight={innerHeight}
-                    type='migrants'
-                />
-            </g>
-        </svg>
+        <>
+        <rect width={width} height={height} fill='white'/>
+        <g transform={`translate(${margin.left}, ${margin.top})`}>
+            <AxisBottom
+                xScale={xScale}
+                innerHeight={innerHeight}
+                tickFormat={xAxisTickFormat}
+                tickOffset={5}
+                type='histogram'
+            />
+            <text
+                className={classes['axis-label']}
+                textAnchor='middle'
+                transform={`translate(${-yAxisLabelOffset},${innerHeight/2}) rotate(-90)`}
+            >{yAxisLabel}
+            </text>
+            <AxisLeft 
+                yScale={yScale} 
+                innerWidth={innerWidth} 
+                tickOffset={5} 
+                type='histogram'
+            />
+            <text
+                className={classes['axis-label']}
+                x={innerWidth /2 }
+                y={innerHeight+xAxisLabelOffset}
+                textAnchor='middle'
+            >{xAxisLabel}
+            </text>
+            <Marks
+                data={binnedData}
+                xScale={xScale}
+                yScale={yScale}
+                tooltipFormat={d=>d}
+                innerHeight={innerHeight}
+                type='migrants'
+            />
+        </g>
+        </>
     )
 }
 

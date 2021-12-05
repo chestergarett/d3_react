@@ -49,6 +49,7 @@ const useData = (csvUrl,chart) => {
                 const row4 = d => {
                     d['Total Dead and Missing'] = +d['Total Dead and Missing'];
                     d['Reported Date'] = new Date(d['Reported Date']);
+                    d.coords = d['Location Coordinates'].split(',').map(d => +d).reverse();
                     return d;
                 }
                 csv(csvUrl, row4).then(setData)
