@@ -8,6 +8,7 @@ const Marks = ({
         xValue, 
         yValue, 
         tooltipFormat, 
+        innerHeight,
         colorScale, 
         colorValue, 
         type, 
@@ -119,6 +120,25 @@ const Marks = ({
                         }
                     </g>
                 )
+                case 'migrants':
+                    return (
+                        <>
+                        {data.map((d,i) => {
+                                    return (
+                                        <rect 
+                                            x={xScale(d.x0)} 
+                                            y={yScale(d.y)} 
+                                            width={xScale(d.x1) - xScale(d.x0)}
+                                            height={innerHeight - yScale(d.y)}
+                                            className={classes.mark}
+                                        >
+                                            <title>{tooltipFormat(d.y)}</title>
+                                        </rect>
+                                    )
+                                }
+                        )}
+                        </>
+                    )
         }
     }
 }

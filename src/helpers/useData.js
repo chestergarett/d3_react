@@ -45,6 +45,14 @@ const useData = (csvUrl,chart) => {
                     });
                 })
                 break;
+            case 'migrants':
+                const row4 = d => {
+                    d['Total Dead and Missing'] = +d['Total Dead and Missing'];
+                    d['Reported Date'] = new Date(d['Reported Date']);
+                    return d;
+                }
+                csv(csvUrl, row4).then(setData)
+                break;
         }
     },[])
 
