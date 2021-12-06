@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import classes from './Axis.module.css';
 import { line, curveNatural, geoNaturalEarth1, geoPath, geoGraticule } from 'd3';
 
