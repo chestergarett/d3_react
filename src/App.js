@@ -7,12 +7,15 @@ import ScatterPlot from './components/ScatterPlot';
 import LineChart from './components/LineChart';
 import MigrantsMap from './components/MigrantsMap';
 import Divider from './components/extras/Divider';
+import Choropleth from './components/Choropleth/Choropleth';
 import './App.css';
 
 function App() {
   
   return (
     <>
+      <Choropleth/>
+        <Divider/>
       <MigrantsMap/>
         <Divider/>
       <WorldMap/>
